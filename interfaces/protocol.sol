@@ -7,7 +7,7 @@ interface IProtocol {
     /**
      * @notice
      * Provide the `_amount` of `want` tokens to the liquidity pool and receives `lpToken` (liquidity provider tokens).
-     * The `want` tokens are added to the liquidity pool and `lpTokens` are minted to the msg.sender
+     * The `want` tokens are added to the liquidity pool and `lpToken` are minted to the msg.sender
      * 
      * @param _amount How much `want` to deposit
      */
@@ -15,9 +15,9 @@ interface IProtocol {
 
     /**
      * @notice
-     * Provide the `_amount` of `lpTokens` tokens to the liquidity pool and redeems `want` tokens.
+     * Provide the `_amount` of `lpToken` tokens to the liquidity pool and redeems `want` tokens.
      * 
-     * @param _amount How much `want` to deposit
+     * @param _amount How much `lpToken` to deposit
      */
     function withdraw(uint256 _amount) external;
 
