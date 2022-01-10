@@ -26,7 +26,6 @@ interface IProtocol {
      * Claim the `rewardToken` (reward tokens).
      * Reward tokens are paid over time to the `lpToken` holders.
      * Here, msg.sender can receive `rewardToken` by calling this function.
-     * 
      */
     function claimRewards() external;
 
