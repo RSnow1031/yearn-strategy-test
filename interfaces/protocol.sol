@@ -7,7 +7,6 @@ interface IProtocol {
     /**
      * @notice
      * Provide the `_amount` of `want` tokens to the liquidity pool and receives `lpToken` (liquidity provider tokens).
-     * 
      * The `want` tokens are added to the liquidity pool and `lpTokens` are minted to the msg.sender
      * 
      * @param _amount How much `want` to deposit
@@ -25,7 +24,6 @@ interface IProtocol {
     /**
      * @notice
      * Claim the `rewardToken` (reward tokens).
-     * 
      * Reward tokens are paid over time to the `lpToken` holders.
      * Here, msg.sender can receive `rewardToken` by calling this function.
      * 
