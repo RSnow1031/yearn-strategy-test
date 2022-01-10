@@ -267,7 +267,7 @@ contract StrategyTest is BaseStrategy {
     function _swap(uint256 _amountIn, address _token) internal {
         bool is_weth = address(want) == weth;
         address[] memory path = new address[](is_weth ? 2 : 3);
-        path[0] = address(lpToken);
+        path[0] = address(rewardToken);
         path[1] = weth;
         if (!is_weth) {
             path[2] = address(want);
