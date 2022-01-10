@@ -42,9 +42,6 @@ contract StrategyTest is BaseStrategy {
         address _lpToken
     ) public BaseStrategy(_vault) {
         // You can set these parameters on deployment to whatever you want
-        // maxReportDelay = 6300;
-        // profitFactor = 100;
-        // debtThreshold = 0;
 
         require(
             address(wantPool) == address(0),
@@ -190,7 +187,6 @@ contract StrategyTest is BaseStrategy {
     function prepareMigration(address _newStrategy) internal override {
         // TODO: Transfer any non-`want` tokens to the new strategy
         // NOTE: `migrate` will automatically forward all `want` in this strategy to the new one
-
         // want is transferred by the base contract's migrate function
         IERC20(rewardToken).transfer(
             _newStrategy,
@@ -202,19 +198,6 @@ contract StrategyTest is BaseStrategy {
         );
     }
 
-    // Override this to add all tokens/tokenized positions this contract manages
-    // on a *persistent* basis (e.g. not just for swapping back to want ephemerally)
-    // NOTE: Do *not* include `want`, already included in `sweep` below
-    //
-    // Example:
-    //
-    //    function protectedTokens() internal override view returns (address[] memory) {
-    //      address[] memory protected = new address[](3);
-    //      protected[0] = tokenA;
-    //      protected[1] = tokenB;
-    //      protected[2] = tokenC;
-    //      return protected;
-    //    }
     function protectedTokens()
         internal
         view
@@ -226,31 +209,6 @@ contract StrategyTest is BaseStrategy {
         protected[0] = lpToken;
         protected[1] = rewardToken;
         return protected;
-    }
-
-    /**
-     * @notice
-     *  Provide an accurate conversion from `_amtInWei` (denominated in wei)
-     *  to `want` (using the native decimal characteristics of `want`).
-     * @dev
-     *  Care must be taken when working with decimals to assure that the conversion
-     *  is compatible. As an example:
-     *
-     *      given 1e17 wei (0.1 ETH) as input, and want is USDC (6 decimals),
-     *      with USDC/ETH = 1800, this should give back 1800000000 (180 USDC)
-     *
-     * @param _amtInWei The amount (in wei/1e-18 ETH) to convert to `want`
-     * @return The amount in `want` of `_amtInEth` converted to `want`
-     **/
-    function ethToWant(uint256 _amtInWei)
-        public
-        view
-        virtual
-        override
-        returns (uint256)
-    {
-        // TODO create an accurate price oracle
-        return _amtInWei;
     }
 
     // returns value of total lp tokens
@@ -281,6 +239,7 @@ contract StrategyTest is BaseStrategy {
         );
     }
 
+    // get the corresponding amount of lp tokens for want
     function convertLpTokenToWant(uint256 _amount) internal view returns (uint256) {
         bool is_weth = address(want) == weth;
         address[] memory path = new address[](is_weth ? 2 : 3);
