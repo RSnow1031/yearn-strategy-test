@@ -15,9 +15,9 @@ interface IProtocol {
 
     /**
      * @notice
-     * Provide the `_amount` of `lpToken` tokens to the liquidity pool and redeems `want` tokens.
+     * Withdraw the `_amount` of `want` tokens from the liquidity pool and return `lpToken`.
      * 
-     * @param _amount How much `lpToken` to deposit
+     * @param _amount How much `want` to withdraw
      */
     function withdraw(uint256 _amount) external;
 
